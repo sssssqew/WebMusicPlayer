@@ -1,0 +1,155 @@
+<!-- *********************************************************************************** -->
+<!-- 웹기반 음악 플레이어 서비스 -->
+<!-- 파일을 벡엔드에 저장하고 메타데이터를 프론트로 가져옴 -->
+<!-- 서버에서 메타 데이터 추출함 (mutagen 사용) -->
+
+<!-- 개발자 (Author) : 이성용 -->
+<!-- 개발완료 (Release) : 2016 / 9 / 06 -->
+<!-- 최종버전 (Version) : 1.0.1 -->
+<!-- 이메일 (E-mail) : sssssqew@naver.com -->
+<!-- 서비스 배포주소 기재 -->
+<!-- *********************************************************************************** -->
+
+{% load staticfiles %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'mp3/song3.ico' %}">	
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href='{% static "css/base.css" %}' />
+	<!-- <script src="{% static 'js/aurora.js' %}"></script> 
+	<script src="{% static 'js/mp3.js' %}"></script> 
+	<script src="{% static 'js/flac.js' %}"></script> -->
+	<!-- <script src="{% static 'js/ogg.js' %}"></script> -->
+	<!-- <script src="{% static 'js/vorbis.js' %}"></script> -->
+	<!-- <script src="{% static 'js/alac.js' %}"></script> -->
+	<!-- <script src="{% static 'js/aac.js' %}"></script> -->
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'mp3:home' %}">
+      	<img src="{% static 'mp3/song3.ico' %}" width="25" height="auto"/>
+      </a>
+    </div>
+    <!-- <h4> django music </h4> -->
+</nav>
+
+<form id="passData" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+	<input type="file" multiple id="songFile" name="songFile" style="display:none"/>
+</form>
+
+<!--  popup cd player  -->
+<div id="myModal" class="modal" data-toggle="tooltip" data-placement="top" title="" data-delay-show="200" data-delay-hide="1000">
+		<img class="modal-content" id="img01">
+		<div id="caption"></div>
+		<div id="lyricsContent"></div>
+</div>
+
+<div class="container">
+	
+	<!-- drag and drop zone -->
+	<div id="dropzone">
+		<div>dropzone</div>
+		<input type="file"  id="musicFiles" accept="audio/*" multiple 
+		onchange="handleFiles(this.files)"/><br>
+	</div>
+
+	<br>
+	<div>
+		<audio id="musicPlayer" class="center-block" style="width: 300px"/>
+	</div>
+	<br>
+
+	<table class="table table-striped">
+ 		<thread>
+ 		<tr>
+ 			<td><B>Cover</B></td>
+ 			<td><B>Album</B></td>
+ 			<td><B>Title</B></td>
+ 			<td><B>Artist</B></td>
+ 			<td><B>Genre</B></td>
+ 			<td><B>Release</B></td>
+ 			<td><B>Time</B></td>
+ 			<td><B>Lyrics</B></td>
+ 			<td><B>Play</B></td>
+ 			<td><B>Favorite</B></td>
+ 		</tr>
+ 		</thread>
+ 		<tbody id="musicList">
+ 		</tbody>
+ 	</table>
+
+</div>
+
+
+<script src="{% static 'js/playControls.js' %}"></script>
+
+
+<!-- *************  음악의 태그를 읽고 테이블에 정보를 표시하는 기능   *************** -->
+
+{% if musics.count > 0 %}
+
+	<script>
+		
+		var musicList = document.getElementById("musicList");
+		musicList.innerHTML = "";
+
+		// 음악 객체와 정보를 담을 배열선언
+		var player = new Array();
+		var coverColumn, cover, album, title, artist, genre, release, time;
+		var buttons, lyricsButton, playButton, likeButton, bar, plabel;
+		var songFile;
+		
+	</script>
+
+	{% for music in musics %}
+		<!-- 함수를 여러번 호출하면 리턴값이 없어짐 -->
+		<!-- 함수를 한번만 호출해서 리턴값을 저장한 다음 사용해야 함 -->
+		{% with music.metadata as meta %}
+	<script>
+
+		var filename = '{{ music.filename }}'; // 서버로 복사한 파일의 이름 
+		var originName = "{{ music.name }}"; // 파일 고유의 이름
+		var fileSize = "{{ music.song.size }}";
+
+		// 재생할 음악 파일의 주소 
+		var url = '/static/upload/' + filename;	
+		var likeImg = "{% static 'mp3/like.png' %}";
+
+
+		// 서버 데이터 (파이썬 딕셔너리 접근)
+		var coverImg = "{{ meta.cover }}";
+	  	var albumInfo = "{{ meta.album }}";
+	  	var titleInfo = "{{ meta.title }}";
+	  	var artistInfo = "{{ meta.artist }}";
+	  	var genreInfo = "{{ meta.genre }}";
+	  	var releaseInfo = "{{ meta.release }}";
+	  	var lyrics = "{{ meta.lyrics }}";
+	  	var duration = "{{ meta.duration }}";  
+		 
+	</script>
+
+	<script src="{% static 'js/showPlayList.js' %}"></script>
+
+		{% endwith %}	
+	{% endfor %}
+	<script>
+		var serverLoad = new Date().getTime() - loadStart;
+		console.log("server ends");
+		console.log("sever load..." + serverLoad / 1000 + " sec");
+	</script>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

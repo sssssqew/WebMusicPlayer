@@ -1,0 +1,12 @@
+*.pyc
+__pycache__
+db.sqlite3
+.DS_Store
+song_nginx.conf
+error
+song.wsgi
+song_uwsgi.ini
+uwsgi_params
+albumCover
+upload
+
