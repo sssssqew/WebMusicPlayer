@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from django.conf.urls import url
 from . import views as mp # namespace 를 지정하면 urls.py를 열었을때 어느 모듈인지 구분하기 쉬움 
 
