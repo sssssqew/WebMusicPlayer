@@ -68,7 +68,7 @@ def saveSong(request):
 				# 터미널에서 updating 이라는 메세지가 나오면서 시간이 오래 걸림 (3초)
 				# 저장할때 해당파일만 변경해서 실제 로딩할때는 updating 메시지가 안나옴 
 				# 경로에서 mp3/ 제거하니까 됨 
-				cmd = 'find ./static/upload -iname "' + audioFile.filename() +'" -execdir mid3iconv -e cp949 {} \;'
+				cmd = 'find static/upload -iname "' + audioFile.filename() +'" -execdir mid3iconv -e cp949 {} \;'
 				os.system(cmd)
 
 				print ('\n')
