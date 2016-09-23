@@ -36,7 +36,7 @@ class AudioFile(models.Model):
 		musicName = os.path.splitext(self.filename())[0] # 확장자를 제외한 파일명 
 		# 앨범커버 주소 (static 앞에 / 제거하니까 됨)
 		coverURL = 'static/albumCover/'+ musicName + '.jpg'  
-		coverDefault = '/static/albumCover/cdp.png'
+		coverDefault = 'static/albumCover/cdp.png'
 		titleDefault = os.path.splitext(self.name)[0]
 
 		meta = {"cover": coverDefault, "album": "", "title": titleDefault, "artist": "", "genre": "", "release": "", "encodedby": "", "lyrics": "", "duration": 0}
