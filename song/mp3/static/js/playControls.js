@@ -279,8 +279,8 @@
 	     		// CD Player 버튼으로 노래를 듣다가 Play 버튼으로 다른 음악을 재생시
 	     		if(where == 1){
 					// CD Player 로 듣다가 Play 버튼으로 다른 음악을 재생시 
-					pEl = document.getElementById(prevID);
-					pEl.clicked = true;
+					modalImg.clicked = true;
+					modalImg.className = "modal-content";
 
 					console.log("You played the other song with cd player right before");
 				}else{
@@ -294,10 +294,10 @@
 			if(where == 1) {
 				audio.src = e.target.url;
 
-				pEl = document.getElementById(prevID);
-				pEl.clicked = true;	
+				modalImg.clicked = true;
+				modalImg.className = "modal-content";
 
-		     	console.log("You played the same song with cd player right before");
+		     		console.log("You played the same song with cd player right before");
 			}
 		}
 
@@ -307,14 +307,12 @@
 			e.target.value = "Pause";
 			console.log("play");
 
-
 			// 노래가 끝나서 새로 재생할 때 
 			audio.onended = function(){				
 				console.log("music really ended !!");
 				e.target.value = "Play";
 			};
 
-			
 			// 현재까지 재생한 시간 표시 
 			audio.ontimeupdate = function(){
 				// 버튼으로 재생한 경우만 재생위치 표시 
@@ -327,7 +325,7 @@
 			// 새로운 곡을 재생하면 좋아요 1 증가
 			if(audio.currentTime == 0){
 				var like = document.getElementsByClassName("favor")[e.target.id];
-		     	like.innerText = parseInt(like.innerText) + 1;
+		     		like.innerText = parseInt(like.innerText) + 1;
 			}		
 			
 		}else if(e.target.value == "Pause"){
