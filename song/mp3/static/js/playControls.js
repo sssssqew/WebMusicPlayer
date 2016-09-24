@@ -12,7 +12,8 @@
 	var pEl; // 이전곡 객체 
 	var cnt = 0; // 곡의 수 카운트 
 	var where = -1; // 0 : 재생버튼 , 1 : CD 플레이어  
-
+	var isEnd = false;
+	var prevClicked = true;
 
 	/**************************  드래그앤 드롭 기능  ***********************/
 
@@ -81,12 +82,29 @@
 		}
 	}
 
+	// CD 플레이어 초기화 
+	function CDinit(id){
+		modalImg.src = id.src;
+		modalImg.alt = id.alt;
+		modalImg.value = id.value;
+		modalImg.url = id.url;
+		modalImg.lyrics = id.lyrics;
+		
+		// 가사 변경 
+		lyricsContent.innerText = id.lyrics;
+		captionText.innerHTML = id.alt;
+	}
+	
 	// 현재 재생중인 플레이어만 계속 돌아가게 하기
 	function spinCD(id){
-		if(id != prevID)
+		if(id.value != prevID){
+			modalImg.clicked = true;
 			modalImg.className = "modal-content";
-		else{
-			modalImg.className += " spinning";
+		}else{
+			if(!isEnd){
+				modalImg.clicked = prevClicked;
+				modalImg.className += " spinning";
+			}
 		}
 	}
 
@@ -125,19 +143,10 @@
 
 			function transfer(){
 				 
-				modalImg.src = art.src;
-				modalImg.alt = art.alt;
-				modalImg.value = art.value;
-				modalImg.url = art.url;
-				modalImg.clicked = art.clicked;
-				modalImg.lyrics = art.lyrics;
-
-				// 가사변경 
-				lyricsContent.innerText = art.lyrics;
-				captionText.innerHTML = art.alt;
+				CDinit(art);
 
 				// 현재 재생중인 플레이어만 계속 돌아가게 하기 
-				spinCD(art.value);
+				if(where != 0) spinCD(art);
 			}				
 		}else{
 			clickedOrNOt = false;
@@ -148,19 +157,11 @@
 	function popupCDPlayer(e){
 		
 		modal.style.display = "block";
-		modalImg.src = e.target.src;
-		modalImg.alt = e.target.alt;
-		modalImg.value = e.target.value;
-		modalImg.url = e.target.url;
-		modalImg.clicked = e.target.clicked;
-		modalImg.lyrics = e.target.lyrics;
-
-		// 가사변경
-		lyricsContent.innerText = e.target.lyrics; // &nsbp; 그대로 출력 
-		captionText.innerHTML = e.target.alt; // innerHTML : &nsbp; => 공백으로 해석
+		
+		CDinit(e.target);
 
 		// 현재 재생중인 플레이어만 계속 돌아가게 하기 
-		spinCD(e.target.value);
+		if(where != 0) spinCD(e.target);
 
 	}
 
