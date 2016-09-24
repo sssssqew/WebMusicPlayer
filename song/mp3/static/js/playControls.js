@@ -200,22 +200,24 @@
 			     	if(prevID != -1){
 			     		// Play 버튼으로 노래를 듣다가 CD Player로 다른 음악을 재생시
 			     		if(where == 0){
+			     				modalImg.clicked = true;
 							retrieve();
 							console.log("You played the other song with play button right before");
 						
 						// 이전에 CD Player 로 노래를 듣다가 이전곡 다음곡 재생시 
 						}else{
-							pEl = document.getElementById(prevID);
-							pEl.clicked = true;
+							// pEl = document.getElementById(prevID);
+							// pEl.clicked = true;
 						}
 					}
 					
 				}else{
 					// Play 버튼에서 나와서 같은 노래를 CD Player로 다시 틀었을 경우 
 					if(where == 0) {
+						modalImg.clicked = true;
 						audio.src = e.target.url;	
 						retrieve();
-				     	console.log("You played the same song with play button right before");
+				     		console.log("You played the same song with play button right before");
 					}
 				}
 
@@ -224,6 +226,7 @@
 				if(e.target.clicked == true){		
 					audio.play();
 					e.target.clicked = false;
+					prevClicked = e.target.clicked;
 					console.log("play");
 
 
@@ -233,19 +236,22 @@
 						e.target.clicked = true;
 
 						e.target.className = "modal-content";
+						isEnd = true;
 					};
 
 					// 새로운 곡을 재생하면 좋아요 1 증가 
 					if(audio.currentTime == 0){
 						var like = document.getElementsByClassName("favor")[e.target.value];
-				     	like.innerText = parseInt(like.innerText) + 1;
+				     		like.innerText = parseInt(like.innerText) + 1;
 
-				     	e.target.className += " spinning";
+				     		e.target.className += " spinning";
+				     		isEnd = false;
 					}	
 				
 				}else if(e.target.clicked == false){
 					audio.pause();  
 					e.target.clicked = true;
+					prevClicked = e.target.clicked;
 					console.log("Pause");
 				}
 
