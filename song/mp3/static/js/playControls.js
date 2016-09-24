@@ -187,19 +187,18 @@
 	
 	// 더블클릭시 클릭 이벤트도 같이 실행되는데 이를 막기위해 타이머 설정함 
      modalImg.onclick = function(e){
-     	clickedOrNOt = true;
-     	timer = setTimeout(function() {
-     		if(!prevent) {
-     			
-     			if(prevID != e.target.value){
+     		clickedOrNOt = true;
+     		timer = setTimeout(function() {
+     			if(!prevent) {
+     				if(prevID != e.target.value){
 
-			     	// 이전곡과 다른곡 재생시 
-		     		console.log("You played new song !!");
-		     		audio.src = e.target.url;	
+			     		// 이전곡과 다른곡 재생시 
+		     			console.log("You played new song !!");
+		     			audio.src = e.target.url;	
 
-			     	if(prevID != -1){
-			     		// Play 버튼으로 노래를 듣다가 CD Player로 다른 음악을 재생시
-			     		if(where == 0){
+			     		if(prevID != -1){
+			     			// Play 버튼으로 노래를 듣다가 CD Player로 다른 음악을 재생시
+			     			if(where == 0){
 			     				modalImg.clicked = true;
 							retrieve();
 							console.log("You played the other song with play button right before");
@@ -268,16 +267,15 @@
 	function playMusic(e){
 		progress = document.getElementsByClassName(pClassName)[e.target.id];
 
-     	if(prevID != e.target.id){
+     		if(prevID != e.target.id){
 
-     		// 이전곡과 다른곡 재생시 
-     		console.log("You played new song !!");
-     		audio.src = e.target.url;		
+     			// 이전곡과 다른곡 재생시 
+     			console.log("You played new song !!");
+     			audio.src = e.target.url;		
 	   
-
-	     	if(prevID != -1){
-	     		// CD Player 버튼으로 노래를 듣다가 Play 버튼으로 다른 음악을 재생시
-	     		if(where == 1){
+	     		if(prevID != -1){
+	     			// CD Player 버튼으로 노래를 듣다가 Play 버튼으로 다른 음악을 재생시
+	     			if(where == 1){
 					// CD Player 로 듣다가 Play 버튼으로 다른 음악을 재생시 
 					modalImg.clicked = true;
 					modalImg.className = "modal-content";
