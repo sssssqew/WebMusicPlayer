@@ -56,13 +56,13 @@ def saveSong(request):
 
 			try:
 				audioFile = AudioFile.objects.get(name=song.name)
-				print ("\n" + song.name + '  is already exists in database !!')
+				print ("\n" + song.name.encode('utf-8') + '  is already exists in database !!')
 	 
 			except:
 				# DB에 음악파일 저장 
 				audioFile = AudioFile(song=song, name=song.name)
 				audioFile.save()
-				print ("\n" + song.name + '  just saved in database !!')
+				print ("\n" + song.name.encode('utf-8') + '  just saved in database !!')
 
 				# 한글깨짐 해결 (mutagen)
 				# 터미널에서 updating 이라는 메세지가 나오면서 시간이 오래 걸림 (3초)
