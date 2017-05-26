@@ -133,7 +133,8 @@
 	  	var artistInfo = "{{ meta.artist }}";
 	  	var genreInfo = "{{ meta.genre }}";
 	  	var releaseInfo = "{{ meta.release }}";
-	  	var lyrics = "{{ meta.lyrics }}";
+	  	var lyrics = "{{ meta.lyrics | safe }}";
+		console.log(lyrics);
 	  	var duration = "{{ meta.duration }}";  
 		 
 	</script>
