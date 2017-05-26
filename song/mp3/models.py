@@ -84,7 +84,8 @@ class AudioFile(models.Model):
 					contents = mark_safe(mp3.tags.getall("USLT"))
 					startIdx = contents.find("text=") + 5
 					meta["lyrics"] = mark_safe(contents[startIdx+1:len(contents)-3])
-					meta["lyrics"] = meta["lyrics"].replace("'", '"')
+					meta["lyrics"] = meta["lyrics"].replace('"','\\"')
+					print meta["lyrics"]
 					
 				except:
 					print ("lyrics don't exist")			
