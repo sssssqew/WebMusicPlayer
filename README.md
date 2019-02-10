@@ -5,6 +5,8 @@
 다른 음원도 되지만 멜론에 최적화되어 있습니다. 
 ```
 
+[![syleeUploader](https://img.youtube.com/vi/xdvvqmjUBtY/0.jpg)](https://www.youtube.com/watch?v=xdvvqmjUBtY)
+
 ```
 [install guide]
 ```
