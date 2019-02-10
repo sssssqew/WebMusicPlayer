@@ -9,6 +9,8 @@
 
 ```
 [install guide]
+Go to below repository
+https://github.com/sssssqew/webmusicplayer-new
 ```
 ```
 [issue solution]
