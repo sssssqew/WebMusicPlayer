@@ -3,15 +3,10 @@
 ```
 웹 뮤직 플레이어는 로컬 PC에 있는 음원 파일을 웹서버에 업로드하여 온라인 상에서 청취할 수 있는 서비스입니다. 
 다른 음원도 되지만 멜론에 최적화되어 있습니다. 
+현재 아래 깃저장소로 리뉴얼했으니 아래 링크를 클릭해서 설치를 진행해주세요.
+[리뉴얼 저장소](https://github.com/sssssqew/webmusicplayer-new) 
 ```
 
-[![syleeUploader](https://img.youtube.com/vi/xdvvqmjUBtY/0.jpg)](https://www.youtube.com/watch?v=xdvvqmjUBtY)
-
-```
-[install guide]
-Go to below repository
-https://github.com/sssssqew/webmusicplayer-new
-```
 ```
 [issue solution]
 1.  meta["lyrics"] = meta["lyrics"].replace('"','\\"') # 큰따옴표를 백슬래쉬로 이스케이프
